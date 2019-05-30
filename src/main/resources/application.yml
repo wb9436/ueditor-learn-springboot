@@ -1,0 +1,30 @@
+sunyoo:
+  upload:
+    path: D:/apache-tomcat-7.0.70/webapps/editor/
+    tempPath: D:/apache-tomcat-7.0.70/webapps/temp/
+
+spring:
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${sunyoo.upload.path}
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+      # 上传文件的临时目录
+      location: ${sunyoo.upload.tempPath}
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #useAffectedRows=true 配置这个后返回的是数据受影响的条数, 未配置显示的是匹配的要修改的数据条数
+    url: jdbc:mysql://127.0.0.1:3306/ueditor_learn?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&useSSL=false&useAffectedRows=true&serverTimezone=UTC
+    username: root
+    password: root
+
+mybatis:
+  configuration:
+      map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/**/*Dao.xml
+  typeAliasesPackage: com.sunyoo.**.dto
+
